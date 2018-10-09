@@ -4,18 +4,33 @@ const cardService = require("../services/cardService");
 module.exports = [
     {
       method: 'GET',
-      path: '/posts',
+      path: '/cards',
       handler: async (request, h) => {
-        const cards = await cardService.getCards
-        if (!cards) {
-          return Boom.badImplementation('Could not get cards')
+        try {
+          const result = await cardService.getCards
+          return result;
         }
-        return cards
+        catch (err) {
+          return Boom.badImplementation(err)
+        }
+      }
+    },
+    {
+      method: 'GET',
+      path: '/cards/{id}',
+      handler: async (request, h) => {
+        try {
+          const result = await cardService.getCards
+          return result;
+        }
+        catch (err) {
+          return Boom.badImplementation(err)
+        }
       }
     },
     {
       method: 'POST',
-      path: '/posts',
+      path: '/cards',
       handler: async (req, h) => {
         try {
           const result = await cardService.addCard(req)
@@ -24,9 +39,6 @@ module.exports = [
         catch (err) {
           return Boom.badImplementation(err)
         }
- 
-
-
       }
     }
 ];

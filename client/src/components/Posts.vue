@@ -10,7 +10,7 @@
 </template>
 <script>
 import Card from './Card'
-import PostsService from '@/services/PostService'
+import {fetchPosts} from '@/services/PostService'
 export default {
   name: 'posts',
   components: {
@@ -27,7 +27,8 @@ export default {
   },
   methods: {
     async getPosts () {
-      const response = await PostsService.fetchPosts()
+      let response = await fetchPosts()
+      console.log(response);
       this.sections = response;
     },
     getSection (val) {

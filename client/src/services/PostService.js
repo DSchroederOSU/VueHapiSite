@@ -1,12 +1,16 @@
 import Api from '@/services/Api'
 
-export default {
-  async fetchPosts () {
-    const p = await Api().get('posts')
-    return await splitArray(p.data, 3);
-  }
+export async function getCardById(id) {
+  let p = await Api().get(`cards/${id}`)
+  console.log(p)
+  return p;
 }
 
+export async function fetchPosts () {
+  let p = await Api().get('cards')
+  console.log(p)
+  return await splitArray(p.data, 3);
+}
 // split array into chunks of (3) and push group to new array
 // this is so the Vue component can make <row>'s' with columns dynamically
 async function splitArray(arr, s) {
